@@ -1,0 +1,19 @@
+[package]
+name = "ds18b20-example"
+version = "0.1.0"
+edition = "2021"
+description = "Example for reading temperature data from a DS18B20 with a STM32F3DISCOVERY."
+repository = "https://github.com/bartweber/ds18b20-example.git"
+keywords = ["ds18b20", "one-wire-bus", "stm32f3"]
+
+[dependencies]
+cortex-m = "0.7.2"
+cortex-m-rt = "0.6.14"
+stm32f3-discovery = "0.7.0"
+panic-itm = "0.4.2"
+one-wire-bus = "0.1.1"
+ds18b20 = "0.1.1"
+arrform = "0.1.1"
+
+[patch.crates-io]
+#one-wire-bus = { path ="../../3rd-party/one-wire-bus"}

@@ -1,7 +1,6 @@
 #![no_main]
 #![no_std]
 
-use core::fmt::Error;
 use cortex_m::iprintln;
 use cortex_m::peripheral::ITM;
 use panic_itm; // panic handler
@@ -34,7 +33,7 @@ fn main() -> ! {
 
     let mut gpioa = device_periphs.GPIOA.split(&mut reset_and_clock_control.ahb);
 
-    let mut one_wire_pin = gpioa.pa1.into_open_drain_output(&mut gpioa.moder, &mut gpioa.otyper);
+    let one_wire_pin = gpioa.pa1.into_open_drain_output(&mut gpioa.moder, &mut gpioa.otyper);
 
     let mut one_wire_bus = OneWire::new(one_wire_pin).unwrap();
 
@@ -62,7 +61,7 @@ fn main() -> ! {
                     continue;
                 }
                 // You will generally create the sensor once, and save it for later
-                let sensor: Ds18b20 = Ds18b20::new::<Error>(device_address).unwrap();
+                let sensor: Ds18b20 = Ds18b20::new::<Infallible>(device_address).unwrap();
 
                 // contains the read temperature, as well as config info such as the resolution used
                 let sensor_data = sensor.read_data(&mut one_wire_bus, &mut delay).unwrap();
